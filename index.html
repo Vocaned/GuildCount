@@ -1,0 +1,46 @@
+<html>
+    <head>
+        <title>Discord Guild Limit Checker</title>
+        <style>
+            * {
+                font-size: 5vw;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <input id="login" type=hidden value="Log In" onclick="login()"/>
+        <p id="result"></p>
+
+
+        <script>
+            function login() {
+                // TODO: state?
+                location = "https://discordapp.com/api/oauth2/authorize?client_id=664203335251001354&redirect_uri=https%3A%2F%2Ffam0r.github.io%2FDGuildLimit&response_type=code&scope=guilds"
+            }
+
+            const getGuilds = async () => {
+                    let userType = new RegExp("token_type=(.+?)&").exec(location.hash)[1]
+                    let token = new RegExp("access_token=(.+?)&").exec(location.hash)[1]
+
+                    const response = await fetch('https://discordapp.com/api/v6/users/@me/guilds', {
+                        headers: {
+                            "Authorization": userType + " " + token
+                        }
+                    });
+                    return response.json();
+            }
+
+            if (location.hash === "") {
+                document.getElementById("login").type = "button"
+            } else {
+                document.getElementById("result").innerHTML = "Fetching data ..."
+
+                getGuilds().then(response => {
+                    let num = response.length
+                    document.getElementById("result").innerHTML = "You are in " + num + "/100 guilds!"
+                });
+            }
+        </script>
+    </body>
+</html>
