@@ -15,8 +15,7 @@
 
         <script>
             function login() {
-                // TODO: state?
-                location = "https://discordapp.com/api/oauth2/authorize?client_id=664203335251001354&redirect_uri=https%3A%2F%2Ffam0r.github.io%2FDGuildLimit&response_type=code&scope=guilds"
+                location = "https://discordapp.com/api/oauth2/authorize?response_type=token&client_id=664203335251001354&scope=guilds"
             }
 
             const getGuilds = async () => {
