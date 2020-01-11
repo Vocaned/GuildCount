@@ -30,10 +30,12 @@
             if (location.hash === "") {
                 document.getElementById("login").type = "button"
             } else {
-                let userType = new RegExp("token_type=(.+?)&").exec(location.hash)[1]
-                let token = new RegExp("access_token=(.+?)&").exec(location.hash)[1]
-
+                let hash = location.hash
                 history.replaceState(null, "Discord Guild Limit Checker", "#")
+
+                let userType = new RegExp("token_type=(.+?)&").exec(hash)[1]
+                let token = new RegExp("access_token=(.+?)&").exec(hash)[1]
+
                 document.getElementById("result").innerHTML = "Fetching data ..."
 
                 getGuilds(userType, token).then(response => {
