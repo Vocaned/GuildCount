@@ -15,7 +15,7 @@
 
         <script>
             function login() {
-                location = "https://discordapp.com/api/oauth2/authorize?response_type=token&client_id=664203335251001354&scope=guilds"
+                location = "https://discordapp.com/api/oauth2/authorize?response_type=token&client_id=664203335251001354&scope=guilds";
             }
 
             const getGuilds = async (userType, token) => {
@@ -28,19 +28,19 @@
             }
 
             if (location.hash === "") {
-                document.getElementById("login").type = "button"
+                document.getElementById("login").type = "button";
             } else {
-                let hash = location.hash
-                history.replaceState(null, "Discord Guild Limit Checker", "#")
+                let hash = location.hash;
+                history.replaceState(null, "Discord Guild Limit Checker", "#");
 
-                let userType = new RegExp("token_type=(.+?)&").exec(hash)[1]
-                let token = new RegExp("access_token=(.+?)&").exec(hash)[1]
+                let userType = new RegExp("token_type=(.+?)&").exec(hash)[1];
+                let token = new RegExp("access_token=(.+?)&").exec(hash)[1];
 
-                document.getElementById("result").innerHTML = "Fetching data ..."
+                document.getElementById("result").innerHTML = "Fetching data ...";
 
                 getGuilds(userType, token).then(response => {
-                    let num = response.length
-                    document.getElementById("result").innerHTML = "You are in " + num + "/100 guilds!"
+                    let num = response.length;
+                    document.getElementById("result").innerHTML = "You are in " + num + "/100 guilds!";
                 });
             }
         </script>
