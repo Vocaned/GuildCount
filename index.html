@@ -16,15 +16,10 @@
         </style>
     </head>
     <body>
-        <input id="login" type=hidden value="Connect to Discord" onclick="login()"/>
-        <p id="result"></p>
+        <p id="result">Redirecting...</p>
 
 
         <script>
-            function login() {
-                location = "https://discordapp.com/api/oauth2/authorize?response_type=token&client_id=664203335251001354&scope=guilds";
-            }
-
             const getGuilds = async (userType, token) => {
                     const response = await fetch('https://discordapp.com/api/v6/users/@me/guilds', {
                         headers: {
@@ -35,7 +30,7 @@
             }
 
             if (location.hash === "") {
-                document.getElementById("login").type = "button";
+                location = "https://discordapp.com/api/oauth2/authorize?response_type=token&client_id=664203335251001354&scope=guilds";
             } else {
                 let hash = location.hash;
                 history.replaceState(null, "Discord Guild Limit Checker", "#");
@@ -43,7 +38,7 @@
                 let userType = new RegExp("token_type=(.+?)&").exec(hash)[1];
                 let token = new RegExp("access_token=(.+?)&").exec(hash)[1];
 
-                document.getElementById("result").innerHTML = "Fetching data ...";
+                document.getElementById("result").innerHTML = "Fetching data...";
 
                 getGuilds(userType, token).then(response => {
                     let num = response.length;
