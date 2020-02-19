@@ -66,12 +66,17 @@
                 }
             } else {
                 let hash = location.hash;
-                history.replaceState(null, "Discord Guild Limit Checker", "#");
-
-                let token = new RegExp("access_token=(.+?)&").exec(hash)[1];
-                let expire = new RegExp("expires_in=(.+?)&").exec(hash)[1];
-                setCookie("token", token, expire);
-                checkGuilds(token);
+                if (hash.includes("error=")) {
+                    document.getElementById("result").innerHTML = "Could not get access";
+                    document.getElementById("logout").type = "button";
+                    document.getElementById("logout").value = "Try again";
+                } else {
+                    history.replaceState(null, "Discord Guild Limit Checker", "#");
+                    let token = new RegExp("access_token=(.+?)&").exec(hash)[1];
+                    let expire = new RegExp("expires_in=(.+?)&").exec(hash)[1];
+                    setCookie("token", token, expire);
+                    checkGuilds(token);
+                }
             }
         </script>
     </body>
