@@ -23,14 +23,11 @@
         <script>
             function logout() {
                 document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
-                location = "https://discordapp.com/api/oauth2/authorize?response_type=token&client_id=664203335251001354&scope=guilds";
-
-                // DEV
-                //location = "https://discordapp.com/api/oauth2/authorize?response_type=token&client_id=635256162593538073&scope=guilds";
+                location = "https://discord.com/api/oauth2/authorize?response_type=token&client_id=664203335251001354&scope=guilds";
             }
 
             const getGuilds = async (token) => {
-                    const response = await fetch('https://discordapp.com/api/v6/users/@me/guilds', {
+                    const response = await fetch('https://discord.com/api/v8/users/@me/guilds', {
                         headers: {
                             "Authorization": "Bearer " + token
                         }
